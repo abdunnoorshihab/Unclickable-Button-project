@@ -8,81 +8,105 @@
   display: none;
 }
 
+/* -------------------------------------------------- */
+/* Base Layout */
+/* -------------------------------------------------- */
+
 body {
   padding: 2rem;
   width: 100%;
-  min-height: 100vh;
-  background: url(assets/img1.gif),url(assets/img4.webp);
+  min-height: 100svh; /* better than 100vh on mobile */
+  background:
+    url(assets/img1.gif) center / cover no-repeat,
+    url(assets/img4.webp) center / cover no-repeat;
   display: flex;
   flex-direction: column;
+  overflow-x: hidden;
 }
 
 .header-img {
-  display: flex;
   width: 100%;
   max-width: 600px;
-  margin-inline: auto;
+  margin: 0 auto 1rem;
+  display: block;
   filter: drop-shadow(5px 5px 20px rgba(0, 0, 0, 0.2));
 }
 
 .container {
   flex: 1;
   position: relative;
-  isolation: isolate;
   width: 100%;
   max-width: 1200px;
-  margin-inline: auto;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+
+/* -------------------------------------------------- */
+/* Images */
+/* -------------------------------------------------- */
 
 .image-1,
 .image-2 {
   position: absolute;
-  top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translateX(-50%);
 }
 
 .image-1 {
   width: 175px;
+  top: 40%;
 }
 
 .image-2 {
   width: 250px;
+  top: 55%;
 }
 
+/* -------------------------------------------------- */
+/* Buttons */
+/* -------------------------------------------------- */
+
 .btn {
-  position: absolute;
-  top: calc(100% - 5rem);
   min-width: 120px;
   padding: 0.75rem 1rem;
   font-size: 1.25rem;
   outline: none;
   border: none;
   background-color: #f8fafc;
-  border-radius: 5px;
-  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 6px;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
   cursor: pointer;
-  transition: 0.3s;
+  transition: all 0.25s ease;
+  touch-action: manipulation;
 }
 
 .btn:hover {
   background-color: #e2e8f0;
-  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.btn-wrapper {
+  position: absolute;
+  bottom: 2rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
 }
 
 .btn-yes {
-  left: 50%;
-  transform: translateX(calc(-100% - 1rem));
   z-index: 1;
 }
 
 .btn-no {
-  left: calc(50% + 1rem);
-  transition: all 0.5s ease;
   z-index: 2;
 }
 
-/* Responsive adjustments -------------------------------------------------- */
+/* -------------------------------------------------- */
+/* Tablet */
+/* -------------------------------------------------- */
+
 @media (max-width: 768px) {
   body {
     padding: 1rem;
@@ -92,40 +116,25 @@ body {
     max-width: 420px;
   }
 
-  .container {
-    max-width: 100%;
-    padding: 0 1rem;
-  }
-
-  /* scale down absolutely positioned images so they don't overflow */
   .image-1 {
     width: 140px;
-    top: 45%;
+    top: 42%;
   }
 
   .image-2 {
     width: 200px;
-    top: 55%;
+    top: 58%;
   }
 
-  /* move buttons into the normal flow to avoid cut-off on short viewports */
   .btn {
-    position: static;
-    display: block;
-    margin: 1rem auto 0;
-    transform: none;
-    top: auto;
-    left: auto;
-    min-width: 110px;
     font-size: 1.1rem;
-  }
-
-  .btn-yes,
-  .btn-no {
-    transform: none;
-    left: auto;
+    min-width: 110px;
   }
 }
+
+/* -------------------------------------------------- */
+/* Mobile */
+/* -------------------------------------------------- */
 
 @media (max-width: 480px) {
   body {
@@ -136,18 +145,19 @@ body {
     max-width: 320px;
   }
 
+  /* Stack content vertically */
   .container {
-    padding: 0 0.5rem;
+    flex-direction: column;
+    justify-content: flex-start;
   }
 
-  /* avoid overlapping absolute elements on very small screens by stacking */
   .image-1,
   .image-2 {
     position: relative;
-    transform: none;
-    left: auto;
     top: auto;
-    margin: 0.6rem auto;
+    left: auto;
+    transform: none;
+    margin: 0.5rem auto;
     display: block;
   }
 
@@ -159,12 +169,18 @@ body {
     width: 160px;
   }
 
+  .btn-wrapper {
+    position: relative;
+    bottom: auto;
+    margin-top: 1rem;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
   .btn {
-    min-width: 100px;
-    padding: 0.6rem 0.9rem;
-    font-size: 1rem;
     width: 100%;
     max-width: 260px;
-    box-sizing: border-box;
+    font-size: 1rem;
+    padding: 0.65rem 0.9rem;
   }
 }
