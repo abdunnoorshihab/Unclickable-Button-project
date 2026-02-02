@@ -4,36 +4,58 @@ const imageTwo = document.querySelector(".image-2");
 const btnYes = document.querySelector(".btn-yes");
 const btnNo = document.querySelector(".btn-no");
 
+/* -------------------------------------------------- */
+/* Helpers */
+/* -------------------------------------------------- */
 function getRandomNumber(min, max) {
-  // Calculate the random number between min and max (inclusive)
-  const randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
-
-  return randomNumber;
+  return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-btnNo.addEventListener("mouseover", (event) => {
-  const containerHeight = container.getBoundingClientRect().height;
-  const containerWidth = container.getBoundingClientRect().width;
-  const btnHeight = btnNo.getBoundingClientRect().height;
-  const btnWidth = btnNo.getBoundingClientRect().width;
-  const btnTop = btnNo.getBoundingClientRect().top;
-  const btnLeft = btnNo.getBoundingClientRect().left;
+function moveNoButton() {
+  // Force absolute positioning ONLY when moving
+  btnNo.style.position = "absolute";
 
-  let newTop = btnTop;
-  let newLeft = btnLeft;
-  while (Math.abs(newTop - btnTop) < containerHeight / 3) {
-    newTop = getRandomNumber(0, containerHeight - btnHeight);
+  const containerRect = container.getBoundingClientRect();
+  const btnRect = btnNo.getBoundingClientRect();
+
+  const maxTop = containerRect.height - btnRect.height;
+  const maxLeft = containerRect.width - btnRect.width;
+
+  let newTop, newLeft;
+
+  do {
+    newTop = getRandomNumber(0, maxTop);
+  } while (Math.abs(newTop - btnRect.top) < containerRect.height / 4);
+
+  do {
+    newLeft = getRandomNumber(0, maxLeft);
+  } while (Math.abs(newLeft - btnRect.left) < containerRect.width / 4);
+
+  btnNo.style.top = `${newTop}px`;
+  btnNo.style.left = `${newLeft}px`;
+}
+
+/* -------------------------------------------------- */
+/* Desktop: hover */
+/* -------------------------------------------------- */
+btnNo.addEventListener("mouseover", () => {
+  if (window.innerWidth > 768) {
+    moveNoButton();
   }
-
-  while (Math.abs(newLeft - btnLeft) < containerWidth / 3) {
-    newLeft = getRandomNumber(0, containerWidth - btnWidth);
-  }
-
-  btnNo.style.top = Math.floor(newTop) + "px";
-  btnNo.style.left = Math.floor(newLeft) + "px";
 });
 
-btnYes.addEventListener("click", (e) => {
+/* -------------------------------------------------- */
+/* Mobile: touch / tap */
+/* -------------------------------------------------- */
+btnNo.addEventListener("touchstart", (e) => {
+  e.preventDefault(); // prevents accidental click
+  moveNoButton();
+});
+
+/* -------------------------------------------------- */
+/* YES button */
+/* -------------------------------------------------- */
+btnYes.addEventListener("click", () => {
   btnNo.classList.add("hide");
   imageOne.classList.add("hide");
   imageTwo.classList.remove("hide");
