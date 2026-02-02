@@ -2,18 +2,47 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="styles.css" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
     <title>Ask For Date</title>
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css" />
   </head>
+
   <body>
-    <img src="assets/date.png.png" alt="date?" class="header-img" />
+    <!-- Header Image -->
+    <img
+      src="assets/date.png.png"
+      alt="Do you want to go on a date?"
+      class="header-img"
+    />
+
+    <!-- Main Container -->
     <div class="container" id="container">
-      <img src="assets/erm-fingers.gif" alt="please" class="image-1" />
-      <img src="assets/oh-yay.gif" alt="yes" class="image-2 hide" />
-      <button class="btn btn-yes">Yes</button>
-      <button class="btn btn-no">No</button>
+      <!-- Images -->
+      <img
+        src="assets/erm-fingers.gif"
+        alt="Please"
+        class="image-1"
+      />
+
+      <img
+        src="assets/oh-yay.gif"
+        alt="Yes reaction"
+        class="image-2 hide"
+      />
+
+      <!-- Buttons Wrapper (IMPORTANT for mobile) -->
+      <div class="btn-wrapper">
+        <button class="btn btn-yes" type="button">Yes</button>
+        <button class="btn btn-no" type="button">No</button>
+      </div>
     </div>
+
+    <!-- Script -->
     <script src="main.js"></script>
   </body>
 </html>
