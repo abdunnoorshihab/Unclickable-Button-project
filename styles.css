@@ -81,3 +81,90 @@ body {
   transition: all 0.5s ease;
   z-index: 2;
 }
+
+/* Responsive adjustments -------------------------------------------------- */
+@media (max-width: 768px) {
+  body {
+    padding: 1rem;
+  }
+
+  .header-img {
+    max-width: 420px;
+  }
+
+  .container {
+    max-width: 100%;
+    padding: 0 1rem;
+  }
+
+  /* scale down absolutely positioned images so they don't overflow */
+  .image-1 {
+    width: 140px;
+    top: 45%;
+  }
+
+  .image-2 {
+    width: 200px;
+    top: 55%;
+  }
+
+  /* move buttons into the normal flow to avoid cut-off on short viewports */
+  .btn {
+    position: static;
+    display: block;
+    margin: 1rem auto 0;
+    transform: none;
+    top: auto;
+    left: auto;
+    min-width: 110px;
+    font-size: 1.1rem;
+  }
+
+  .btn-yes,
+  .btn-no {
+    transform: none;
+    left: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    padding: 0.75rem;
+  }
+
+  .header-img {
+    max-width: 320px;
+  }
+
+  .container {
+    padding: 0 0.5rem;
+  }
+
+  /* avoid overlapping absolute elements on very small screens by stacking */
+  .image-1,
+  .image-2 {
+    position: relative;
+    transform: none;
+    left: auto;
+    top: auto;
+    margin: 0.6rem auto;
+    display: block;
+  }
+
+  .image-1 {
+    width: 120px;
+  }
+
+  .image-2 {
+    width: 160px;
+  }
+
+  .btn {
+    min-width: 100px;
+    padding: 0.6rem 0.9rem;
+    font-size: 1rem;
+    width: 100%;
+    max-width: 260px;
+    box-sizing: border-box;
+  }
+}
